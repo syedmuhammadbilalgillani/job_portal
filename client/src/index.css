@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Figtree", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.custom-tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-tooltip-container::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 40px;
+    /* Adjust as needed */
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip-container:hover::after {
+    opacity: 1;
+}
+
+.btn-green {
+    background-color: #4EDE79;
+    color: white;
+    transition: all 0.2s;
+}
+
+.btn-green:hover {
+    background-color: #6acf89;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+
+.btn-red {
+    background-color: #FE4A4A;
+    color: white;
+    transition: all 0.2s;
+
+}
+
+.btn-red:hover {
+    background-color: #c55d5d;
+    color: white;
+    transform: translateY(-2px);
+
+}
+
+.btn-black {
+    background-color: #1D2721;
+    color: white;
+    transition: all 0.2s;
+}
+
+.btn-black:hover {
+    background-color: #29322d;
+    transform: translateY(-2px);
+}
+
+.btn-pink {
+    background-color: #FFD2E8;
+    transition: all 0.2s;
+}
+
+.btn-pink:hover {
+    transform: translateY(-2px);
+}
+
+.gray {
+    color: #56645c;
+}
+
+.bg-skin {
+    background-color: #fdf2e6;
+}
+
+.bg-pink {
+    background-color: #FFD2E8;
+}
+
+.bg-dark-green {
+    background-color: #262e29;
+}
+
+
+
+
+.shadow-custom {
+    box-shadow: 0px 0px 9px 1px rgba(114, 114, 114, 0.75);
+    -webkit-box-shadow: 0px 0px 9px 1px rgba(114, 114, 114, 0.75);
+    -moz-box-shadow: 0px 0px 9px 1px rgba(114, 114, 114, 0.75);
+}
+
+#hero-section {
+    background-image: url(./assets/Banner.jpg);
+    height: 100vh;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footer-banner {
+    background-image: url(./assets/footer-banner.jpeg);
+    height: 100vh;
+    border-radius: 30px;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.about-banner {
+    background-image: url(./assets/aboutbanner.jpeg);
+    height: 90vh;
+    border-radius: 40px;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+#JobPageBanner {
+    background-image: url(./assets/jobpagebanner.png);
+    height: 75vh;
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.aboutpageposter {
+    background-image: url(./assets/aboutpageline.svg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+
+
+}
+
+
+
+/* Medium Devices and Smaller (from 992px down to 50px) */
+@media (max-width: 991.98px) and (min-width: 50px) {
+    #hero-section {
+        background-image: url(./assets/banner.jpeg);
+        background-position: bottom right;
+        height: 140vh;
+    }
+
+    .footer-banner {
+        background-image: url(./assets/footer-sm.jpeg);
+        height: 140vh;
+        border-radius: 30px;
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .about-banner {
+        background-image: url(./assets/aboutbannersm.jpeg);
+        height: 180vh;
+        border-radius: 30px;
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #JobPageBanner {
+        background-image: url(./assets/jobpagebannersm.png);
+        height: 170vh;
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+
+}
+
+.right-job-poster {
+    color: #fff;
+    background-image: linear-gradient(rgba(25, 45, 34, 0) 35%, rgba(25, 45, 34, .95)), url(./assets/right-job-poster.jpg);
+    background-position: 0 0, 50% 25%;
+    background-size: auto, cover;
+    border-radius: 15px;
+
+}
+
+/* .stickyd {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;
+} */

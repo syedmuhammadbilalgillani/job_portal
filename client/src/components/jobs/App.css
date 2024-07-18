@@ -1,0 +1,16 @@
+.scrollable-container {
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.fixed-element {
+    width: 100%;
+    background-color: yellow;
+    transition: position 0.3s;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
