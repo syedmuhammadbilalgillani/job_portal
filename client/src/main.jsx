@@ -8,11 +8,9 @@ import "../font-6/css/sharp-solid.css";
 
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router.jsx";
-import ErrorBoundary from "./ErrorBoundary.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <RouterProvider router={router} />
-    </ErrorBoundary>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

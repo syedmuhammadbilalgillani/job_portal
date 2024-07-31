@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-const ContactForm = lazy(() => import("../components/contacform/ContactForm"));
-const Loader = lazy(() => import("../components/Loader/Loader"));
+import ContactForm from "../components/contacform/ContactForm";
 import logo1 from "../assets/general.svg";
 import logo2 from "../assets/mail.svg";
 import logo3 from "../assets/supportcontact.svg";
@@ -29,9 +28,7 @@ function ContactUs() {
           </div>
         </div>
         <div className="col-span-2   md-to-xs:col-span-full">
-          <Suspense fallback={<Loader />}>
-            <ContactForm />
-          </Suspense>
+          <ContactForm />
         </div>
       </div>
       <h1 className="text-4xl font-semibold text-center mb-4">

@@ -60,6 +60,10 @@ const Draft = ({ placeholder }) => {
   return (
     <div className="Draft">
       <h1>Create Contact and Company</h1>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur maxime
+      optio, ipsum, animi excepturi quisquam culpa laboriosam ea est saepe
+      dolorum molestiae explicabo eius accusantium ipsam inventore iusto
+      consequatur facilis!
       <form className="hidden" onSubmit={handleSubmit}>
         <input
           type="text"

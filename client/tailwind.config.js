@@ -24,6 +24,15 @@ export default withMT({
 
     },
   },
+  corePlugins: {
+    // List style type utility ko disable karne ke liye
+    // listStyleType: false,
+
+    // Agar aapko kisi aur utility ko disable karna hai, toh use bhi false set karein
+    // Example:
+    // float: false,
+    // margin: false,
+  },
   plugins: [
     require('flowbite/plugin')
   ]

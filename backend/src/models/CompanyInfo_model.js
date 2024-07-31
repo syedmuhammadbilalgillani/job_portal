@@ -1,7 +1,11 @@
-// models/CompanyInfo.js
 import mongoose from 'mongoose';
 
 const companyInfoSchema = new mongoose.Schema({
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     companyName: {
         type: String,
         required: true,
@@ -43,6 +47,14 @@ const companyInfoSchema = new mongoose.Schema({
     },
     companyDescription: {
         type: String
+    },
+    companyPostDescription: {
+        type: String
+    },
+    approvalStatus: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
     }
 }, { timestamps: true });
 

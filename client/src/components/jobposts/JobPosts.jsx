@@ -1,6 +1,7 @@
 import React from "react";
 
 import JobCard from "../jobcard/JobCard";
+
 function JobPosts() {
   return (
     <>

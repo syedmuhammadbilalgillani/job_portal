@@ -1,22 +1,16 @@
 import React, { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-const HomeHerosection = lazy(() =>
-  import("../components/homeherosection/HomeHerosection.jsx")
-);
-const Status = lazy(() => import("../components/status/Status"));
-const JobOfferPosterBanner = lazy(() =>
-  import("../components/jobofferposterbanner/JobOfferPosterBanner")
-);
-const ContactUsBanner = lazy(() =>
-  import("../components/contact-us-banner/ContactUsBanner")
-);
-const Jobs = lazy(() => import("../components/jobs/Jobs"));
-const JobBanner = lazy(() => import("../components/jobbanner/JobBanner"));
-const BlogCard = lazy(() => import("../components/blogcard/BlogCard"));
-const Questions = lazy(() => import("../components/questions/Questions"));
-const ContactUsBannerFooter = lazy(() =>
-  import("../components/contactusbannerfooter/ContactUsBannerFooter")
-);
+
+import HomeHerosection from "../components/homeherosection/HomeHerosection.jsx";
+import Status from "../components/status/Status";
+import JobOfferPosterBanner from "../components/jobofferposterbanner/JobOfferPosterBanner";
+import ContactUsBanner from "../components/contact-us-banner/ContactUsBanner";
+import Jobs from "../components/jobs/Jobs";
+import JobBanner from "../components/jobbanner/JobBanner";
+import BlogCard from "../components/blogcard/BlogCard";
+import Questions from "../components/questions/Questions";
+import ContactUsBannerFooter from "../components/contactusbannerfooter/ContactUsBannerFooter";
+
 import footerbadge from "../assets/footer-badge.svg";
 
 function Home() {
@@ -25,6 +19,7 @@ function Home() {
       <div id="Home">
         <HomeHerosection />
         <Status />
+
         <JobOfferPosterBanner />
         <ContactUsBanner>
           <h1 className="text-5xl font-bold">

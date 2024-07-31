@@ -10,6 +10,8 @@ const Input = ({
   placeholder,
   required = false,
   className = "",
+
+  disabled = false,
 }) => {
   return (
     <div className={`w-full space-y-2 ${className}`}>
@@ -24,6 +26,7 @@ const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        disabled={disabled}
       />
     </div>
   );

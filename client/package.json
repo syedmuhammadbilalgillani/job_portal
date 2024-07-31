@@ -18,11 +18,15 @@
     "gsap": "^3.12.5",
     "html-react-parser": "^5.1.10",
     "jodit-react": "^4.1.2",
+    "js-cookie": "^3.0.5",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.13.0",
-    "react-router-dom": "^6.24.1"
+    "react-router-dom": "^6.24.1",
+    "react-tabs": "^6.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

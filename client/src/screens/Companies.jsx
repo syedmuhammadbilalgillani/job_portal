@@ -1,35 +1,18 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
 import axios from "axios";
-
-const JobPageBanner = lazy(() =>
-  import("../components/jobpagebanner/JobPageBanner")
-);
+import JobPageBanner from "../components/jobpagebanner/JobPageBanner";
+import CompanyAndJob from "../components/companyAndJobForm/CompanyAndJob";
 
 const Loader = lazy(() => import("../components/Loader/Loader"));
 import { Link } from "react-router-dom";
 import { scrollToSection } from "../constants/Scroll";
+import { useCompanyJob } from "../context/CompanyJobContext";
 // import big from "../assets/background large.png";
 
 const Companies = () => {
-  const [companies, setCompanies] = useState([]);
+  const { companies } = useCompanyJob();
+  // console.log(companies);
 
-  useEffect(() => {
-    // Function to fetch all companies
-    const fetchCompanies = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/v1/company/readCompany"
-        );
-
-        setCompanies(response.data);
-        // console.log(companies);
-      } catch (error) {
-        console.error("Error fetching companies:", error);
-      }
-    };
-
-    fetchCompanies();
-  }, []);
   const handleLinkClick = (id) => {
     setTimeout(() => scrollToSection(id, 500), 100); // 2000ms = 2 seconds
   };
@@ -84,9 +67,9 @@ const Companies = () => {
         </div>
         {/* ))} */}
       </div>
-      <Suspense fallback={<Loader />}>
-        <JobPageBanner />
-      </Suspense>
+
+      <JobPageBanner />
+
       <style>
         {`
             

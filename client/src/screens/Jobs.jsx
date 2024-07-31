@@ -1,8 +1,7 @@
 import React, { lazy } from "react";
-const JobsPosts = lazy(() => import("../components/jobposts/JobPosts"));
-const JobPageBanner = lazy(() =>
-  import("../components/jobpagebanner/JobPageBanner")
-);
+import JobsPosts from "../components/jobposts/JobPosts";
+import JobPageBanner from "../components/jobpagebanner/JobPageBanner";
+
 function Jobs() {
   return (
     <>

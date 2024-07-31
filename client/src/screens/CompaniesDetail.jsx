@@ -3,7 +3,7 @@
 import React, { lazy, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-const Loader = lazy(() => import("../components/Loader/Loader"));
+import Loader from "../components/Loader/Loader";
 
 const CompanyDetail = () => {
   const { id } = useParams();
@@ -53,7 +53,9 @@ const CompanyDetail = () => {
           <hr />
           <div className="px-6 py-10">
             <div
-              dangerouslySetInnerHTML={{ __html: company.companyDescription }}
+              dangerouslySetInnerHTML={{
+                __html: company.companyPostDescription,
+              }}
             />
           </div>
         </div>

@@ -11,6 +11,12 @@
     font-family: "Figtree", sans-serif;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+
+}
+
+
 html,
 body {
     height: 100%;
@@ -28,9 +34,10 @@ body {
     top: 40px;
     /* Adjust as needed */
     left: 0;
-    background-color: #333;
+    background-color: #1f1e1e;
     color: #fff;
     padding: 5px;
+    z-index: 99;
     border-radius: 5px;
     font-size: 12px;
 
@@ -216,3 +223,12 @@ body {
     position: sticky;
     top: 50px;
 } */
+
+.btn-overlay {
+    width: 0;
+
+}
+
+.btn:hover .btn-overlay {
+    width: 120px;
+}

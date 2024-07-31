@@ -12,6 +12,10 @@ dotenv.config();
 // api routes
 import contactRoutes from './routes/contact&CompanyRoutes.js';
 import companyRoutes from './routes/companyRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import galleryRoutes from './routes/galleryRoutes.js';
+import jobRoutes from './routes/jobRoutes.js';
+import jobApplicationRoutes from './routes/jobApplicationRoutes.js';
 
 
 
@@ -48,11 +52,16 @@ const app = express();
 
 // // Handle preflight requests
 // app.options('*', cors(corsOptions));
+
+
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
-
+// app.use(cors({
+//     origin: 'http://localhost:5173', // Aap ke frontend ka origin
+//     credentials: true, // Agar aap credentials use kar rahe hain (cookies, authorization headers)
+// }));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(bodyParser.json());
@@ -61,6 +70,10 @@ app.use(cookieParser());
 
 app.use('/api/v1/createContactAndCompany', contactRoutes);
 app.use('/api/v1/company', companyRoutes);
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/gallery', galleryRoutes);
+app.use('/api/v1/job', jobRoutes);
+app.use('/api/v1/jobApplication', jobApplicationRoutes);
 
 
 
