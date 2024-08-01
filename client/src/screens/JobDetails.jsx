@@ -37,7 +37,7 @@ function JobDetails() {
     const company = companies.find((company) => company._id === companyId);
     return company ? company.companyLogo : "Unknown";
   };
-
+  // console.log(jobsAdmin);
   const getCompanyName = (companyId) => {
     const company = companies.find((company) => company._id === companyId);
     return company ? company.companyName : "Unknown";
@@ -102,7 +102,7 @@ function JobDetails() {
   return (
     <>
       <main
-        className="bg-[#FDF8F3] px-[5%] py-[10%] space-y-10"
+        className="bg-[#FDF8F3] px-[5%] py-[10%] space-y-10 "
         data-aos="fade-up"
         data-aos-delay="50"
         data-aos-duration="1000"
@@ -230,22 +230,30 @@ function JobDetails() {
                       Edit Job
                     </button>
                   )}
-                  {isAuthenticated ? (
-                    <button
-                      onClick={() => applyForJob(job._id)}
-                      className="btn-black px-12 py-5 font-semibold rounded-lg "
-                    >
-                      Apply now
-                    </button>
+                  {/* {isAuthenticated ? (
+                    role === "employer" ? (
+                      <button
+                        onClick={() => applyForJob(job._id)}
+                        className="btn-black px-12 py-5 font-semibold rounded-lg"
+                      >
+                        Apply now
+                      </button>
+                    ) : (
+                      <Link
+                        className="btn-black px-12 py-5 font-semibold rounded-lg"
+                        to="/"
+                      >
+                        Apply now
+                      </Link>
+                    )
                   ) : (
                     <Link
-                      className="btn-black px-12 py-5 font-semibold rounded-lg "
+                      className="btn-black px-12 py-5 font-semibold rounded-lg"
                       to="/login"
                     >
-                      {" "}
                       Apply now
                     </Link>
-                  )}
+                  )} */}
                 </div>
               </>
             )}
@@ -259,16 +267,30 @@ function JobDetails() {
             </p>
 
             {isAuthenticated ? (
-              <button
-                onClick={() => applyForJob(job._id)}
-                className="btn-black px-12 py-5 font-semibold rounded-lg"
-              >
-                Apply now
-              </button>
+              role === "employer" ? (
+                <button
+                  onClick={() => applyForJob(job._id)}
+                  className="btn-black px-12 py-5 font-semibold rounded-lg"
+                >
+                  Apply now
+                </button>
+              ) : (
+                <button className="py-5">
+                  <Link
+                    style={{ marginTop: 5 }}
+                    className="btn-black px-12 py-5  font-semibold rounded-lg"
+                    to="/"
+                  >
+                    Apply now
+                  </Link>
+                </button>
+              )
             ) : (
-              <button className="btn-black font-semibold rounded-lg py-5">
-                <Link to="/login" className="px-12  ">
-                  {" "}
+              <button className="py-5">
+                <Link
+                  className="btn-black px-12 py-5 font-semibold rounded-lg ml-1" // Adjust the `mt-*` class as needed
+                  to="/login"
+                >
                   Apply now
                 </Link>
               </button>
@@ -282,106 +304,3 @@ function JobDetails() {
 }
 
 export default JobDetails;
-
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import Loader from "../components/Loader/Loader";
-// import axios from "axios";
-// import { useCompanyJob } from "../context/CompanyJobContext";
-// import moment from "moment";
-// import JobPageBanner from "../components/jobpagebanner/JobPageBanner";
-// function JobDetails() {
-//   const { id } = useParams();
-//   const { companies } = useCompanyJob();
-//   const [job, setJob] = useState(null);
-
-//   const getCompanyLogo = (companyId) => {
-//     const company = companies.find((company) => company._id === companyId);
-//     return company ? company.companyLogo : "Unknown";
-//   };
-
-//   const getCompanyName = (companyId) => {
-//     const company = companies.find((company) => company._id === companyId);
-//     return company ? company.companyName : "Unknown";
-//   };
-
-//   useEffect(() => {
-//     const fetchJobById = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://localhost:3000/api/v1/job/readJob/${id}`
-//         );
-
-//         setJob(response.data);
-//       } catch (error) {
-//         console.error("Error fetching company:", error);
-//       }
-//     };
-
-//     fetchJobById();
-//   }, [id]);
-//   if (!job) {
-//     return <Loader />;
-//   }
-//   const formatDate = (dateString) => {
-//     return moment(dateString).fromNow();
-//   };
-//   return (
-//     <>
-//       <main
-//         className="bg-[#FDF8F3] px-[5%] py-[10%]"
-//         data-aos="fade-up"
-//         data-aos-delay="50"
-//         data-aos-duration="1000"
-//       >
-//         <section className="grid grid-cols-3  gap-5">
-//           <div className="col-span-2  bg-white shadow-custom rounded-xl p-6">
-//             <div className="flex justify-between">
-//               <div className="flex justify-center items-center gap-8">
-//                 <div className="p-4 inline-block border shadow-custom rounded-2xl">
-//                   <img src={getCompanyLogo(job.companyLogo)} alt="" />
-//                 </div>
-//                 <div className="flex flex-col justify-between items-start h-full py-1">
-//                   <p className="text-green-400 text-xl font-semibold">
-//                     {getCompanyName(job.companyLogo)}
-//                   </p>
-//                   <h1 className="font-semibold text-3xl">{job.title}</h1>
-//                   <h3 className="gray bg-gray-200 w-fit  px-4 text-sm py-1.5 rounded-md">
-//                     {job.jobCategory}
-//                   </h3>
-//                 </div>
-//               </div>
-//               <div className="gray font-medium - tracking-wider uppercase">
-//                 {formatDate(job.postedDate)}
-//               </div>
-//             </div>
-//             <hr className="my-10" />
-//             <div
-//               dangerouslySetInnerHTML={{
-//                 __html: job.jobPostDescription,
-//               }}
-//             />
-//             <button className="btn-green px-12 py-5 font-semibold rounded-lg mt-4 ">
-//               Apply now
-//             </button>
-//           </div>
-
-//           <div className="col-span-1 h-fit p-[5%] space-y-3 bg-white shadow-custom rounded-xl px-5 sticky top-10">
-//             <h2 className="font-semibold text-4xl">Interested in this job ?</h2>
-//             <p className="gray text-lg">
-//               {" "}
-//               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-//               Suspendisse varius enim in eros elementum tristique.
-//             </p>
-//             <button className="btn-black px-12 py-5 font-semibold rounded-lg ">
-//               Apply now
-//             </button>
-//           </div>
-//         </section>
-//       </main>
-//       <JobPageBanner></JobPageBanner>
-//     </>
-//   );
-// }
-
-// export default JobDetails;

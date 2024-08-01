@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCompanyAndJob, getAllCompanies, getCompanyById, getCompanyByIdForUser } from '../controllers/companyController.js';
+import { createCompanyAndJob, getAllCompanies, getCompanyById, getCompanyByIdForUser, updateCompanyByIdForUser } from '../controllers/companyController.js';
 import { addRole, verifyToken } from '../middlewares/authMiddleware.js';
 import CompanyInfo from '../models/CompanyInfo_model.js';
 import Job from '../models/job_model.js';
@@ -16,6 +16,9 @@ router
 router
     .route("/readCompanyForUser")
     .get(verifyToken, getCompanyByIdForUser);
+router
+    .route("/updateCompanyInfo")
+    .put(verifyToken, updateCompanyByIdForUser);
 
 router.get('/checkUserCompany', verifyToken, async (req, res) => {
     const userId = req.user._id; // Assuming user is authenticated and req.user contains the logged-in user

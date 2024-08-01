@@ -64,6 +64,22 @@ export const updateJobById = async (req, res) => {
         res.status(500).json({ message: 'Error updating job', error });
     }
 };
+export const deleteJobById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await Job.deleteOne({ _id: id });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Job not found' });
+        }
+
+        res.status(200).json({ message: 'Job deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting job', error });
+    }
+};
+
 export const getJobById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -72,6 +88,35 @@ export const getJobById = async (req, res) => {
             return res.status(404).json({ message: 'job not found' });
         }
         res.json(job);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+export const getAuthenticatedUserJobsPost = async (req, res) => {
+    try {
+        // Assuming req.user contains the authenticated user's info
+        const userId = req.user._id;
+
+        // Find the company associated with the user
+        const company = await CompanyInfo.findOne({ createdBy: userId });
+
+        if (!company) {
+            return res.status(404).json({ message: 'No company found for this user' });
+        }
+
+        // Find all jobs associated with the company
+        const jobs = await Job.find({ companyLogo: company._id });
+
+        res.status(200).json(jobs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+export const getAllJobsForAdmin = async (req, res) => {
+    try {
+        const jobs = await Job.find(); // Populate company information if needed
+        res.json(jobs);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

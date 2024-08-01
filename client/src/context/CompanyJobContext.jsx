@@ -20,7 +20,9 @@ export const CompanyJobProvider = ({ children }) => {
   const token = Cookies.get("AUTH_TOKEN"); //useMemo(() => Cookies.get("AUTH_TOKEN"), []);
   const [companies, setCompanies] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [jobsAdmin, setJobsAdmin] = useState([]);
   const [userCompany, setUserCompany] = useState(null);
+  const [isAuthenticatedUserJobs, setIsAuthenticatedUserJobs] = useState(null);
 
   useEffect(() => {
     // Function to fetch all companies
@@ -131,7 +133,39 @@ export const CompanyJobProvider = ({ children }) => {
       // Optionally handle error in state
     }
   };
+  const fetchgetAuthenticatedUserJobsPost = async (token) => {
+    try {
+      const response = await axios.get(
+        `${apiUrl}/job/getAuthenticatedUserJobsPost`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
+      // console.log(response.data);
+
+      const data = response.data;
+      setIsAuthenticatedUserJobs(data);
+    } catch (error) {
+      console.error("Error fetching user's company data:", error);
+      // Optionally handle error in state
+    }
+  };
+  const fetchJobsAdmin = async (token) => {
+    try {
+      const response = await axios.get(`${apiUrl}/job/readJobsAdmin`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      startTransition(() => {
+        setJobsAdmin(response.data);
+      });
+      // console.log(jobsAdmin);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  };
+  // console.log(jobsAdmin);
   return (
     <CompanyJobContext.Provider
       value={{
@@ -146,6 +180,11 @@ export const CompanyJobProvider = ({ children }) => {
         fetchCompanyByIdForUser,
         userCompany,
         setUserCompany,
+        fetchgetAuthenticatedUserJobsPost,
+        isAuthenticatedUserJobs,
+        setIsAuthenticatedUserJobs,
+        fetchJobsAdmin,
+        jobsAdmin,
       }}
     >
       {children}

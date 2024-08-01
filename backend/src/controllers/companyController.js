@@ -60,7 +60,31 @@ export const getAllCompanies = async (req, res) => {
 };
 
 
+export const updateCompanyInfo = async (req, res) => {
+    const { companyId } = req.params; // Get company ID from request parameters
+    const updateData = req.body; // Get updated data from request body
 
+    try {
+        // Find the company by ID
+        const company = await CompanyInfo.findById(companyId);
+
+        if (!company) {
+            return res.status(404).json({ message: 'Company not found' });
+        }
+
+        // Update company information with the new data
+        Object.assign(company, updateData);
+
+        // Save the updated company information
+        const updatedCompany = await company.save();
+
+        // Send the updated company data as response
+        res.status(200).json(updatedCompany);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 
 // Get a company by ID
 export const getCompanyById = async (req, res) => {
@@ -88,6 +112,27 @@ export const getCompanyByIdForUser = async (req, res) => {
         res.status(200).json(company);
     } catch (error) {
         console.error('Error fetching company:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+export const updateCompanyByIdForUser = async (req, res) => {
+    const userId = req.user._id;
+    const { companyData } = req.body;
+
+    try {
+        const company = await CompanyInfo.findOne({ createdBy: userId });
+
+        if (!company) {
+            return res.status(404).json({ message: 'Company not found' });
+        }
+
+        Object.assign(company, companyData);
+
+        const updatedCompany = await company.save();
+
+        res.status(200).json({ message: 'Company updated successfully', updatedCompany });
+    } catch (error) {
+        console.error('Error updating company:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };

@@ -10,6 +10,7 @@ import axios from "axios";
 import { useToast } from "../context/ToastContext/ToastContext";
 import { useNavigate } from "react-router-dom";
 import { useCompanyJob } from "./CompanyJobContext";
+import { useJobApplicationContext } from "./JobApplicationContext";
 
 const AuthContext = createContext();
 
@@ -23,7 +24,12 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [userContactInfo, setUserContactInfo] = useState(null);
   const [allUserData, setAllUserData] = useState(null);
-  const { fetchCompanyByIdForUser } = useCompanyJob();
+  const {
+    fetchCompanyByIdForUser,
+    fetchgetAuthenticatedUserJobsPost,
+    fetchJobsAdmin,
+  } = useCompanyJob();
+  const { getUserAppliedApplications } = useJobApplicationContext();
   const checkTokenValidity = () => {
     const token = Cookies.get("AUTH_TOKEN");
     return token !== undefined;
@@ -150,6 +156,8 @@ export const AuthProvider = ({ children }) => {
         await userProfile(token);
         await fetchUserContactInfo(token);
         await fetchCompanyByIdForUser(token);
+        await getUserAppliedApplications(token);
+        // await fetchgetAuthenticatedUserJobsPost(token);
         navigate("/");
       });
 
@@ -345,7 +353,7 @@ export const AuthProvider = ({ children }) => {
       fetchRole(token);
       userProfile(token);
       fetchUserContactInfo(token);
-      fetchCompanyByIdForUser(token);
+      getUserAppliedApplications(token);
     }
     setIsLoading(false);
   }, []);
@@ -354,6 +362,15 @@ export const AuthProvider = ({ children }) => {
     if (role === "admin" && isAuthenticated) {
       const token = Cookies.get("AUTH_TOKEN");
       fetchAllUsersData(token);
+      fetchJobsAdmin(token);
+    }
+  }, [role, isAuthenticated]);
+  useEffect(() => {
+    if (role === "admin" || (role === "jobSeeker" && isAuthenticated)) {
+      const token = Cookies.get("AUTH_TOKEN");
+
+      fetchCompanyByIdForUser(token);
+      fetchgetAuthenticatedUserJobsPost(token);
     }
   }, [role, isAuthenticated]);
 

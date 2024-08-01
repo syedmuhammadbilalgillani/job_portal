@@ -91,17 +91,17 @@ export const router = createBrowserRouter([
         <ErrorBoundary>
           <ToastProvider>
             <RoleProvider>
-              <CompanyJobProvider>
-                <AuthProvider>
-                  <CompanyProvider>
-                    <GalleryProvider>
-                      <JobApplicationProvider>
+              <JobApplicationProvider>
+                <CompanyJobProvider>
+                  <AuthProvider>
+                    <CompanyProvider>
+                      <GalleryProvider>
                         <App />
-                      </JobApplicationProvider>
-                    </GalleryProvider>
-                  </CompanyProvider>
-                </AuthProvider>
-              </CompanyJobProvider>
+                      </GalleryProvider>
+                    </CompanyProvider>
+                  </AuthProvider>
+                </CompanyJobProvider>
+              </JobApplicationProvider>
             </RoleProvider>
           </ToastProvider>
         </ErrorBoundary>

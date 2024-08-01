@@ -10,12 +10,15 @@ import UserProfile from "../components/userprofile/UserProfile";
 import Password from "../components/userprofile/Password";
 
 import CompanyProfile from "../components/userprofile/CompanyProfile";
+import PostedJobs from "../components/userprofile/PostedJobs";
+import AllJobs from "../components/userprofile/AllJobs.jsx";
+import AppliedJobs from "../components/userprofile/AppliedJobs.jsx";
 function Profile() {
   const { role, logoutUser } = useAuth();
 
   return (
     <>
-      <Tabs className="min-h-dvh w-full  ">
+      <Tabs className="min-h-dvh w-full ">
         <TabList className="fixed top-0 z-10 left-0 h-dvh bg-white sm-to-xs:bottom-0 sm-to-xs:top-auto sm-to-xs:h-[5rem] sm-to-xs:w-full p-3  ">
           <section className="h-full space-y-4 flex flex-col sm-to-xs:flex-row sm-to-xs:items-cen sm-to-xs:justify-start items-start px-5 sm-to-xs:items-center shadow-custom rounded-xl text-2xl gap-3 pt-5 sm-to-xs:pt-0 sm-to-xs:px-5">
             <Link
@@ -40,12 +43,36 @@ function Profile() {
               <i className="fa-duotone fa-solid fa-lock"></i>
               <p className="sm-to-xs:hidden gray text-sm font-bold">Password</p>
             </Tab>
+            {role === "employer" && (
+              <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
+                <i className="fa-duotone fa-solid fa-briefcase"></i>
+                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                  Applied Jobs
+                </p>
+              </Tab>
+            )}
 
             {(role === "jobSeeker" || role === "admin") && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
-                <i className="fa-duotone fa-solid fa-user-tie-hair"></i>
+                <i className="fa-duotone fa-solid fa-buildings"></i>
                 <p className="sm-to-xs:hidden gray text-sm font-bold">
                   Company
+                </p>
+              </Tab>
+            )}
+            {(role === "jobSeeker" || role === "admin") && (
+              <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
+                <i className="fa-duotone fa-solid fa-address-card"></i>
+                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                  My jobs
+                </p>
+              </Tab>
+            )}
+            {role === "admin" && (
+              <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
+                <i className="fa-duotone fa-solid fa-mailbox"></i>
+                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                  All jobs
                 </p>
               </Tab>
             )}
@@ -66,7 +93,7 @@ function Profile() {
             </button>
           </section>
         </TabList>
-        <section className=" ml-[10rem] px-5 sm-to-xs:p-0 sm-to-xs:m-0   ">
+        <section className=" ml-[11rem] p-5 sm-to-xs:pb-16 scroll-p-6 sm-to-xs:m-0 ">
           <TabPanel className="">
             <UserProfile />
           </TabPanel>
@@ -76,10 +103,25 @@ function Profile() {
           <TabPanel>
             <Password />
           </TabPanel>
+          {role === "employer" && (
+            <TabPanel>
+              <AppliedJobs />
+            </TabPanel>
+          )}
 
           {(role === "jobSeeker" || role === "admin") && (
             <TabPanel>
               <CompanyProfile />
+            </TabPanel>
+          )}
+          {(role === "jobSeeker" || role === "admin") && (
+            <TabPanel>
+              <PostedJobs />
+            </TabPanel>
+          )}
+          {role === "admin" && (
+            <TabPanel>
+              <AllJobs />
             </TabPanel>
           )}
           {role === "admin" && (

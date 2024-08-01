@@ -123,9 +123,6 @@ function Navbar() {
             {/* {(role === "jobSeeker" || role === "admin") && ( */}
 
             <Link
-              // to={`${
-              //   location.pathname === "/jobs" ? `/postJobOffer` : "/jobs"
-              // }`}
               to={`${
                 (location.pathname === "/jobs" && role === "jobSeeker") ||
                 role === "admin"
@@ -139,7 +136,12 @@ function Navbar() {
                   : ""
               } `}
             >
-              {`${location.pathname === "/jobs" ? "Post Job" : "Browse Jobs"}`}
+              {`${
+                (location.pathname === "/jobs" && role === "jobSeeker") ||
+                role === "admin"
+                  ? "Post Job"
+                  : "Browse Jobs"
+              }`}
             </Link>
             {/* // )} */}
 

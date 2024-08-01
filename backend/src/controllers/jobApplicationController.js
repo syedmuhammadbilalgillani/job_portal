@@ -36,3 +36,19 @@ export const GetUserAppliedApplications = async (req, res) => {
         res.status(500).json({ message: 'Internal server error', error });
     }
 };
+
+export const deleteJobApplicationById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await JobApplication.deleteOne({ _id: id });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Job Application not found' });
+        }
+
+        res.status(200).json({ message: 'Job Application deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting job', error });
+    }
+};
