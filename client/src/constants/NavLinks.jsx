@@ -5,7 +5,7 @@ export const NavLinks = {
     // { name: "Jobs", link: "/jobs" },
     { name: "Jobs", link: "/jobs" },
     { name: "Companies", link: "/companies" },
-    { name: "Blogs", link: "/blogs" },
+    // { name: "Blogs", link: "/blogs" },
     { name: "Contact", link: "/contact" },
   ],
   row2: [

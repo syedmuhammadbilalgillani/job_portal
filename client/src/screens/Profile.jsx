@@ -12,14 +12,16 @@ import Password from "../components/userprofile/Password";
 import CompanyProfile from "../components/userprofile/CompanyProfile";
 import PostedJobs from "../components/userprofile/PostedJobs";
 import AllJobs from "../components/userprofile/AllJobs.jsx";
+import AllCompanies from "../components/userprofile/AllCompanies.jsx";
 import AppliedJobs from "../components/userprofile/AppliedJobs.jsx";
+import AppliedJobApplications from "../components/userprofile/AppliedJobApplications.jsx";
 function Profile() {
   const { role, logoutUser } = useAuth();
 
   return (
     <>
       <Tabs className="min-h-dvh w-full ">
-        <TabList className="fixed top-0 z-10 left-0 h-dvh bg-white sm-to-xs:bottom-0 sm-to-xs:top-auto sm-to-xs:h-[5rem] sm-to-xs:w-full p-3  ">
+        <TabList className="fixed top-0 z-10 left-0 h-dvh max-w-[11rem] sm-to-xs:max-w-full bg-white sm-to-xs:bottom-0 sm-to-xs:top-auto sm-to-xs:h-[5rem] sm-to-xs:w-full p-3  ">
           <section className="h-full space-y-4 flex flex-col sm-to-xs:flex-row sm-to-xs:items-cen sm-to-xs:justify-start items-start px-5 sm-to-xs:items-center shadow-custom rounded-xl text-2xl gap-3 pt-5 sm-to-xs:pt-0 sm-to-xs:px-5">
             <Link
               to="/"
@@ -27,26 +29,26 @@ function Profile() {
               data-tooltip="back to home"
             >
               <i className="fa-duotone fa-solid fa-arrow-left"></i>
-              <p className="sm-to-xs:hidden gray text-sm font-bold">Back</p>
+              <p className="sm-to-xs:hidden gray text-xs font-bold">Back</p>
             </Link>
             <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
               <i className="fa-duotone fa-solid fa-user"></i>
-              <p className="sm-to-xs:hidden gray text-sm font-bold">
+              <p className="sm-to-xs:hidden gray text-xs font-bold">
                 My Profile
               </p>
             </Tab>
             <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
               <i className="fa-duotone fa-solid fa-rectangle-history"></i>
-              <p className="sm-to-xs:hidden gray text-sm font-bold">Gallery</p>
+              <p className="sm-to-xs:hidden gray text-xs font-bold">Gallery</p>
             </Tab>
             <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
               <i className="fa-duotone fa-solid fa-lock"></i>
-              <p className="sm-to-xs:hidden gray text-sm font-bold">Password</p>
+              <p className="sm-to-xs:hidden gray text-xs font-bold">Password</p>
             </Tab>
             {role === "employer" && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
                 <i className="fa-duotone fa-solid fa-briefcase"></i>
-                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
                   Applied Jobs
                 </p>
               </Tab>
@@ -55,7 +57,15 @@ function Profile() {
             {(role === "jobSeeker" || role === "admin") && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
                 <i className="fa-duotone fa-solid fa-buildings"></i>
-                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
+                  Applications
+                </p>
+              </Tab>
+            )}
+            {(role === "jobSeeker" || role === "admin") && (
+              <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
+                <i className="fa-duotone fa-solid fa-buildings"></i>
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
                   Company
                 </p>
               </Tab>
@@ -63,16 +73,25 @@ function Profile() {
             {(role === "jobSeeker" || role === "admin") && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
                 <i className="fa-duotone fa-solid fa-address-card"></i>
-                <p className="sm-to-xs:hidden gray text-sm font-bold">
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
                   My jobs
+                </p>
+              </Tab>
+            )}
+            <hr />
+            {role === "admin" && (
+              <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
+                <i className="fa-duotone fa-solid fa-mailbox"></i>
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
+                  All jobs
                 </p>
               </Tab>
             )}
             {role === "admin" && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
                 <i className="fa-duotone fa-solid fa-mailbox"></i>
-                <p className="sm-to-xs:hidden gray text-sm font-bold">
-                  All jobs
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
+                  All Companies
                 </p>
               </Tab>
             )}
@@ -80,7 +99,9 @@ function Profile() {
             {role === "admin" && (
               <Tab className="cursor-pointer list-none flex gap-2 items-end uppercase">
                 <i className="fa-duotone fa-solid fa-user-tie-hair"></i>
-                <p className="sm-to-xs:hidden gray text-sm font-bold">ADMIN</p>
+                <p className="sm-to-xs:hidden gray text-xs font-bold">
+                  All Users
+                </p>
               </Tab>
             )}
 
@@ -89,7 +110,7 @@ function Profile() {
               className="absolute bottom-5 sm-to-xs:bottom-auto sm-to-xs:right-5 flex gap-2 uppercase"
             >
               <i className="fa-duotone fa-solid fa-right-from-bracket"></i>
-              <p className="sm-to-xs:hidden gray text-sm font-bold">Logout</p>
+              <p className="sm-to-xs:hidden gray text-xs font-bold">Logout</p>
             </button>
           </section>
         </TabList>
@@ -111,6 +132,11 @@ function Profile() {
 
           {(role === "jobSeeker" || role === "admin") && (
             <TabPanel>
+              <AppliedJobApplications />
+            </TabPanel>
+          )}
+          {(role === "jobSeeker" || role === "admin") && (
+            <TabPanel>
               <CompanyProfile />
             </TabPanel>
           )}
@@ -119,9 +145,15 @@ function Profile() {
               <PostedJobs />
             </TabPanel>
           )}
+
           {role === "admin" && (
             <TabPanel>
               <AllJobs />
+            </TabPanel>
+          )}
+          {role === "admin" && (
+            <TabPanel>
+              <AllCompanies />
             </TabPanel>
           )}
           {role === "admin" && (

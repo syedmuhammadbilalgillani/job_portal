@@ -11,7 +11,10 @@ import { GalleryProvider } from "./context/GalleryContext.jsx";
 import { CompanyProvider } from "./context/CompanyContext.jsx";
 import { RoleProvider } from "./context/RoleContext.jsx";
 import { CompanyJobProvider } from "./context/CompanyJobContext.jsx";
-import { JobApplicationProvider } from "./context/JobApplicationContext.jsx";
+import {
+  JobApplicationProvider,
+  useJobApplicationContext,
+} from "./context/JobApplicationContext.jsx";
 
 // pages
 const App = lazy(() => import("./App.jsx"));
@@ -30,6 +33,10 @@ const Login = lazy(() => import("./screens/Login.jsx"));
 const Profile = lazy(() => import("./screens/Profile.jsx"));
 const Gallery = lazy(() => import("./screens/Gallery.jsx"));
 const Forget = lazy(() => import("./components/forget/Forget.jsx"));
+const ElementBuilder = lazy(
+  () => import("./components/elementbuilder/ElementBuilder.jsx")
+);
+// const ResumeForm = lazy(() => import("./components/resumeForm/ResumeForm.jsx"));
 
 const Loader = lazy(() => import("./components/Loader/Loader.jsx"));
 
@@ -68,9 +75,10 @@ const clientRoutes = [
   { path: "/companies", element: <Companies /> },
   { path: "/companies/:id", element: <CompaniesDetail /> },
   { path: "/job/:id", element: <JobDetails /> },
-  { path: "blogs", element: <Blogs /> },
+  // { path: "blogs", element: <Blogs /> },
   { path: "/contact", element: <ContactUs /> },
   { path: "/forget", element: <Forget /> },
+  { path: "/elemetbuilder", element: <ElementBuilder /> },
 ];
 
 const protectedRoutes = [
@@ -132,6 +140,17 @@ export const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage />,
       })),
+      // {
+      //   path: "/submit-resume",
+      //   element: (
+      //     <Suspense fallback={<Loader />}>
+      //       <ResumeCheckMiddleware>
+      //         <ResumeForm />
+      //       </ResumeCheckMiddleware>
+      //     </Suspense>
+      //   ),
+      //   errorElement: <ErrorPage />,
+      // },
       {
         path: "*",
         element: <Navigate to="/" replace />,

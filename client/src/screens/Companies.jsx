@@ -10,12 +10,15 @@ import { useCompanyJob } from "../context/CompanyJobContext";
 // import big from "../assets/background large.png";
 
 const Companies = () => {
-  const { companies } = useCompanyJob();
-  // console.log(companies);
+  const { fetchCompanies, companies, readMore } = useCompanyJob();
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
 
   const handleLinkClick = (id) => {
     setTimeout(() => scrollToSection(id, 500), 100); // 2000ms = 2 seconds
   };
+  if (companies.length === 0) return <p>Company Detail not posted</p>;
   return (
     <>
       <div className=" flex flex-col justify-center items-center text-center py-[10%]">
@@ -49,14 +52,13 @@ const Companies = () => {
                     </h3>
                   </div>
                   <p className="text-lg gray text-start">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Animi magni officia tempora.
+                    {company.companyDescription}
                   </p>{" "}
                   {/* Accessing companyDesc directly from company object */}
                   <Link
                     to={`/companies/${company._id}`}
                     onClick={() => handleLinkClick(`companiesDetail`)} // Use company ID for dynamic URL
-                    className="text-white bg-black w-full rounded-xl hover:bg-gray-900 px-5 py-3 hover:-translate-y-1 transition-all duration-200 block text-center"
+                    className={`text-white bg-black w-full rounded-xl hover:bg-gray-900 px-5 py-3 hover:-translate-y-1 transition-all duration-200 block text-center ${!readMore && "hidden"}`}
                   >
                     Read more
                   </Link>

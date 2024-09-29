@@ -4,10 +4,13 @@ import Input from "../Input/Input";
 import TextAreaInput from "../Input/TextAreaInput";
 import JoditEditor from "jodit-react"; // Import JoditEditor
 import { CompanyContext } from "../../context/CompanyContext";
+import { useToast } from "../../context/ToastContext/ToastContext";
 
 const CompanyJobForm = ({ placeholder }) => {
-  const { createCompanyAndJob, createJob, loading, error } = useCompanyJob();
+  const { createCompany, createJob, loading, error } = useCompanyJob();
   const { company, fetchCompany } = useContext(CompanyContext); // Fetch company from context
+
+  const showToast = useToast();
   useEffect(() => {
     fetchCompany(); // Fetch company data when the component mounts
   }, [fetchCompany]);
@@ -38,16 +41,36 @@ const CompanyJobForm = ({ placeholder }) => {
     contactEmail: "",
   });
 
+  const initialJobState = {
+    title: "",
+    jobCategory: "",
+    jobDescription: "",
+    jobPostDescription: "",
+    location: "",
+    salary: "",
+    jobType: "Full-time",
+    requirements: [],
+    responsibilities: [],
+    lastDateToApply: "",
+    contactEmail: "",
+  };
+
   const handleSubmit = async (e, isCompany) => {
     e.preventDefault();
     try {
       const response = isCompany
-        ? await createCompanyAndJob(companyForm, job)
+        ? await createCompany(companyForm)
         : await createJob(job);
-      console.log(
-        isCompany ? "Company and Job created:" : "Job created:",
-        response
-      );
+
+      // console.log(response.message);
+      if (isCompany) {
+        showToast(response.message, "success");
+        fetchCompany();
+      } else {
+        showToast(response.message, "success");
+        setJob(initialJobState); // Reset job form fields
+        fetchCompany();
+      }
     } catch (err) {
       console.error("Error:", err);
     }
@@ -96,7 +119,7 @@ const CompanyJobForm = ({ placeholder }) => {
       readonly: false, // all options from https://xdsoft.net/jodit/docs/,
       placeholder: placeholder || "Start typing...",
       enableDragAndDropFileToEditor: true,
-      height: 300,
+      height: 500,
       spellcheck: true,
     }),
     [placeholder]
@@ -125,7 +148,17 @@ const CompanyJobForm = ({ placeholder }) => {
           required
         />
       </div>
-
+      <div className="flex gap-5 sm-to-xs:flex-wrap ">
+        <TextAreaInput
+          rows={6}
+          name="jobDescription"
+          label="Job Description :"
+          type="text"
+          value={job.jobDescription}
+          onChange={(e) => handleInputChange(e, setJob)}
+          placeholder="Job Description"
+        />
+      </div>
       <div className="flex gap-5 sm-to-xs:flex-wrap ">
         <Input
           name="location"
@@ -167,17 +200,6 @@ const CompanyJobForm = ({ placeholder }) => {
             <option value="Internship">Internship</option>
           </select>
         </div>
-      </div>
-
-      <div className="flex gap-5 sm-to-xs:flex-wrap ">
-        <Input
-          name="jobDescription"
-          label="Job Description :"
-          type="text"
-          value={job.jobDescription}
-          onChange={(e) => handleInputChange(e, setJob)}
-          placeholder="Job Description"
-        />
       </div>
 
       <div className="flex gap-5 sm-to-xs:flex-wrap ">
@@ -242,7 +264,7 @@ const CompanyJobForm = ({ placeholder }) => {
           onSubmit={(e) => handleSubmit(e, !company)}
           className="p-10 space-y-10 shadow-custom rounded-2xl"
         >
-          {!company && (
+          {!company ? (
             <>
               <h2 className="text-center font-bold text-5xl">Company Form</h2>
               <div className="flex gap-5 sm-to-xs:flex-wrap ">
@@ -263,6 +285,17 @@ const CompanyJobForm = ({ placeholder }) => {
                   onChange={(e) => handleInputChange(e, setCompanyForm)}
                   placeholder="Company Industry"
                   required
+                />
+              </div>
+              <div className="flex gap-5 sm-to-xs:flex-wrap ">
+                <TextAreaInput
+                  rows={6}
+                  name="companyDescription"
+                  label="Company Desc :"
+                  type="text"
+                  value={companyForm.companyDescription}
+                  onChange={(e) => handleInputChange(e, setCompanyForm)}
+                  placeholder="Company Description"
                 />
               </div>
               <div className="flex gap-5 sm-to-xs:flex-wrap ">
@@ -303,16 +336,7 @@ const CompanyJobForm = ({ placeholder }) => {
                   required
                 />
               </div>
-              <div className="flex gap-5 sm-to-xs:flex-wrap ">
-                <Input
-                  name="companyDescription"
-                  label="Company Desc :"
-                  type="text"
-                  value={companyForm.companyDescription}
-                  onChange={(e) => handleInputChange(e, setCompanyForm)}
-                  placeholder="Company Logo"
-                />
-              </div>
+
               <div className="my-4">
                 <div className="my-4">
                   <label className="block mb-2 text-sm font-medium text-gray-700">
@@ -334,9 +358,15 @@ const CompanyJobForm = ({ placeholder }) => {
                 </div>
               </div>
             </>
+          ) : (
+            renderJobForm()
           )}
-          {renderJobForm()}
-          <button type="submit" disabled={loading}>
+          {/* {renderJobForm()} */}
+          <button
+            type="submit"
+            className="btn-green px-12 py-4 rounded-xl font-semibold"
+            disabled={loading}
+          >
             {loading ? "Submitting..." : "Submit"}
           </button>
           {error && <p className="text-red-500">{error}</p>}

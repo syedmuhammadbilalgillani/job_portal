@@ -28,11 +28,11 @@ export const createJobInExistingCompany = async (req, res) => {
         }
 
         // Create a new job and link it to the user's company with approval status set to 'pending'
-        job.companyLogo = userCompany._id; // Link company logo (ID) to the job
+        job.companyId = userCompany._id; // Link company logo (ID) to the job
         const newJob = new Job({ ...job, approvalStatus: 'pending' });
         const savedJob = await newJob.save();
 
-        res.status(201).json({ job: savedJob });
+        res.status(201).json({ job: savedJob, message: 'Job created successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -101,11 +101,11 @@ export const getAuthenticatedUserJobsPost = async (req, res) => {
         const company = await CompanyInfo.findOne({ createdBy: userId });
 
         if (!company) {
-            return res.status(404).json({ message: 'No company found for this user' });
+            return res.status(200).json({ message: 'No company found for this user' });
         }
 
         // Find all jobs associated with the company
-        const jobs = await Job.find({ companyLogo: company._id });
+        const jobs = await Job.find({ companyId: company._id });
 
         res.status(200).json(jobs);
     } catch (error) {

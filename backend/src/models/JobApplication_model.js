@@ -1,4 +1,3 @@
-// models/JobApplication.js
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
@@ -12,6 +11,11 @@ const jobApplicationSchema = new Schema({
     applicant: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true
+    },
+    cv: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CV',
         required: true
     },
     applicationDate: {

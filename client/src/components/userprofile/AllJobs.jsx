@@ -98,7 +98,7 @@ function AllJobs() {
           },
         }
       );
-      fetchgetAuthenticatedUserJobsPost(token);
+      fetchJobsAdmin(token);
       //   setEditingJob(null);
       //   handleUpdateJobModalClose();
     } catch (error) {
@@ -109,34 +109,39 @@ function AllJobs() {
   return (
     <>
       <main>
-        {jobsAdmin?.map((job, index) => (
-          <div
-            key={index}
-            className="p-6 rounded-3xl bg-white shadow-custom m-10 overflow-hidden"
-          >
-            <p className="text-green-400 text-xl font-semibold pb-2">
-              {getCompanyName(job?.companyLogo) || "Company Name"}
-            </p>
-            <div className="flex items-center mb-4 gap-5">
-              <img
-                src={getCompanyLogo(job.companyLogo) || "default-logo.png"}
-                alt="Company Logo"
-                className="p-4 inline-block border shadow-custom rounded-2xl size-20"
-              />
+        {jobsAdmin?.length === 0 ? (
+          <p className="text-center text-gray-500">
+            No jobs available at the moment.
+          </p>
+        ) : (
+          jobsAdmin?.map((job, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-3xl bg-white shadow-custom m-10 overflow-hidden"
+            >
+              <p className="text-green-400 text-xl font-semibold pb-2">
+                {getCompanyName(job?.companyId) || "Company Name"}
+              </p>
+              <div className="flex items-center mb-4 gap-5">
+                <img
+                  src={getCompanyLogo(job.companyId) || "default-logo.png"}
+                  alt="Company Logo"
+                  className="p-4 inline-block border shadow-custom rounded-2xl size-20"
+                />
 
-              <div className="flex justify-between w-full flex-wrap">
-                <h2 className="text-2xl sm-to-xs:text-lg font-bold text-gray-900 mb-1">
-                  {job?.title || "Job Title"}
-                </h2>
-                <h2 className="text-2xl sm-to-xs:text-lg font-bold text-gray-900 mb-1">
-                  {job?._id || "Job Title"}
-                </h2>
+                <div className="flex justify-between w-full flex-wrap">
+                  <h2 className="text-2xl sm-to-xs:text-lg font-bold text-gray-900 mb-1">
+                    {job?.title || "Job Title"}
+                  </h2>
+                  <h2 className="text-2xl sm-to-xs:text-lg font-bold text-gray-900 mb-1">
+                    {job?._id || "Job Title"}
+                  </h2>
+                </div>
               </div>
-            </div>
-            <p className="bg-gray-200 w-fit px-4 text-sm py-1.5 rounded-md mb-4">
-              {job?.jobCategory || "Job Category"}
-            </p>
-            {/* <div className="mb-4 text-gray-700">
+              <p className="bg-gray-200 w-fit px-4 text-sm py-1.5 rounded-md mb-4">
+                {job?.jobCategory || "Job Category"}
+              </p>
+              {/* <div className="mb-4 text-gray-700">
               <p className="mb-2">{job?.jobDescription || "Job Description"}</p>
               <p
                 className="mb-2"
@@ -145,7 +150,7 @@ function AllJobs() {
                 }}
               />
             </div> */}
-            {/* <div className="grid grid-cols-2 gap-4 text-gray-700">
+              {/* <div className="grid grid-cols-2 gap-4 text-gray-700">
               <p>
                 <span className="font-semibold">Location:</span>{" "}
                 {job?.location || "Location"}
@@ -183,24 +188,25 @@ function AllJobs() {
                 {job?.contactEmail || "Contact Email"}
               </p>
             </div> */}
-            <p className="uppercase gray">
-              <strong className="text-black ">Approval Status:</strong>{" "}
-              {job?.approvalStatus || "Approval Status"}
-            </p>
-            <button
-              onClick={() => handleEditClick(job)}
-              className="mt-4 btn-black px-6 rounded-lg py-2"
-            >
-              Edit Approval Status
-            </button>
-            <button
-              onClick={() => handledelete(job._id)}
-              className="mt-4 btn-red px-6 ml-4 rounded-lg py-2"
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+              <p className="uppercase gray">
+                <strong className="text-black ">Approval Status:</strong>{" "}
+                {job?.approvalStatus || "Approval Status"}
+              </p>
+              <button
+                onClick={() => handleEditClick(job)}
+                className="mt-4 btn-black px-6 rounded-lg py-2"
+              >
+                Edit Approval Status
+              </button>
+              <button
+                onClick={() => handledelete(job._id)}
+                className="mt-4 btn-red px-6 ml-4 rounded-lg py-2"
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        )}
       </main>
       <Modal isOpen={updateJobModal} onClose={handleUpdateJobModalClose}>
         {editingJob && (

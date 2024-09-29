@@ -9,8 +9,9 @@
     "build": "node --env-file .env ./index.js",
     "devv": "nodemon --env-file .env ./index.js",
     "start": "nodemon ./index.js",
-    "seed": "node --env-file .env ./src/seeds/seeder.js"
+    "seed": "node ./src/seeds/seed.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -12,7 +12,7 @@ const Footer = lazy(() => import("./components/footer/Footer"));
 function App() {
   const location = useLocation();
 
-  const pathsToHideNavbar = ["/postJobOffer", "/profile"]; // Add your specific paths here
+  const pathsToHideNavbar = ["/postJobOffer", "/profile", "/gallery"]; // Add your specific paths here
   const pathsToHideFooter = ["/postJobOffer", "/gallery", "/profile"]; // Add your specific paths here
 
   const hideNavbar = pathsToHideNavbar.includes(location.pathname);

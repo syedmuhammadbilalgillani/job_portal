@@ -83,7 +83,7 @@ userSchema.methods.updatePassword = async function (password) {
 
 userSchema.methods.isPasswordCorrect = async function (password) {
     const result = await bcrypt.compare(password, this.password);
-    console.log('Password comparison result:', result); // Debugging line
+    // console.log('Password comparison result:', result); // Debugging line
     return result;
 };
 

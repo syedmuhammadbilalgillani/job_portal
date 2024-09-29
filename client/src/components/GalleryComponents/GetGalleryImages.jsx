@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useGallery } from "../../context/GalleryContext";
 import Loader from "../Loader/Loader";
 import { CopyToClipboard } from "react-copy-to-clipboard"; // Make sure to install this package
+import { useLocation } from "react-router-dom";
 
 const GetGalleryImages = () => {
   const { getImages, deleteImages, deleteAllImages, gallery, loading } =
     useGallery();
   const [selectedImages, setSelectedImages] = useState([]);
-
+  const location = useLocation();
   const fetchImages = async () => {
     try {
       await getImages();
@@ -53,7 +54,7 @@ const GetGalleryImages = () => {
       </>
     );
   return (
-    <div className="p-6 bg-gray-100 rounded-2xl shadow-custom ">
+    <div className=" bg-gray-100 rounded-2xl shadow-custom p-10 sm-to-xs:p-5 overflow-scroll col-span-2">
       <div className="flex flex-col sm:flex-row gap-4 mb-6 w-fit">
         <button
           disabled={gallery.length === 0}
@@ -80,7 +81,11 @@ const GetGalleryImages = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-6 h-full">
+      <div
+        className={`grid ${
+          location.pathname === "/postJobOffer" ? "grid-cols-1" : "grid-cols-3"
+        }  md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-6 h-full`}
+      >
         {gallery.length === 0 ? (
           <p className="col-span-full text-center font-bold text-lg uppercase text-gray-400 p-10">
             No images available

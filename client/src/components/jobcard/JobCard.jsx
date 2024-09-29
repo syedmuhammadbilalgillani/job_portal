@@ -16,6 +16,7 @@ function JobCard() {
     const company = companies.find((company) => company._id === companyId);
     return company ? company.companyName : "Unknown";
   };
+  if (jobs.lenght === 0) return <h1>No Jobs Posted</h1>;
   return (
     <>
       {jobs.map((item, index) => (
@@ -48,22 +49,24 @@ function JobCard() {
                   <img
                     loading="lazy"
                     className="h-7"
-                    src={getCompanyLogo(item.companyLogo)}
+                    src={getCompanyLogo(item.companyId)}
                     alt=""
                   />
                 </span>
                 <h6 className="gray font-medium">
-                  {getCompanyName(item.companyLogo)}
+                  {getCompanyName(item.companyId)}
                 </h6>
               </div>
             </div>
-            <Link
-              className="btn-green w-fit px-8 py-3 rounded-lg"
-              to={`/job/${item._id}`}
-              onClick={() => handleLinkClick(`companiesDetail`)} // Use company ID for dynamic URL
-            >
-              Read more
-            </Link>
+            <button className="btn-green py-3 rounded-lg">
+              <Link
+                className=" w-fit px-8 py-3 "
+                to={`/job/${item._id}`}
+                onClick={() => handleLinkClick(`companiesDetail`)} // Use company ID for dynamic URL
+              >
+                Read more
+              </Link>
+            </button>
           </div>
         </div>
       ))}

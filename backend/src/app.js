@@ -16,6 +16,7 @@ import userRoutes from './routes/userRoutes.js';
 import galleryRoutes from './routes/galleryRoutes.js';
 import jobRoutes from './routes/jobRoutes.js';
 import jobApplicationRoutes from './routes/jobApplicationRoutes.js';
+import cvRoutes from './routes/cvRoutes.js';
 
 
 
@@ -74,6 +75,7 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/gallery', galleryRoutes);
 app.use('/api/v1/job', jobRoutes);
 app.use('/api/v1/jobApplication', jobApplicationRoutes);
+app.use('/api/v1/cv', cvRoutes);
 
 
 

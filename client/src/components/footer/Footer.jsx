@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/footerLogo.svg";
 
 import facebook from "../../assets/facebook.svg";
 import linden from "../../assets/linden.svg";
@@ -31,12 +31,7 @@ function Footer() {
         <div className="grid gap-5 grid-cols-3">
           <div className="col-span-1 md-to-xs:col-span-full space-y-5">
             <div>
-              <img
-                loading="lazy"
-                src={logo}
-                className="max-w-[350px] w-full"
-                alt="Logo"
-              />
+              <img loading="lazy" src={logo} className="h-32  " alt="Logo" />
             </div>
             <p className="text-lg text-gray-600">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.

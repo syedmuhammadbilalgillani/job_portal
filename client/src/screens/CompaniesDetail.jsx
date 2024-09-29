@@ -8,15 +8,14 @@ import Loader from "../components/Loader/Loader";
 const CompanyDetail = () => {
   const { id } = useParams();
   const [company, setCompany] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     const fetchCompanyById = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/company/readCompany/${id}`
-        );
+        const response = await axios.get(`${apiUrl}/company/readCompany/${id}`);
 
-        setCompany(response.data);
+        setCompany(response?.data);
       } catch (error) {
         console.error("Error fetching company:", error);
       }
@@ -37,7 +36,7 @@ const CompanyDetail = () => {
           <div className="flex gap-5 p-6">
             <img
               src={company.companyLogo}
-              className="shadow-custom p-5 rounded-lg"
+              className="shadow-custom p-5 rounded-2xl size-36"
               alt=""
             />
             <div className="flex flex-col gap-3">
@@ -48,9 +47,28 @@ const CompanyDetail = () => {
               <p className="gray font-medium text-lg">
                 {formattedNumber}+ employees
               </p>
+              <div className=" flex  items-center gap-5 text-2xl">
+                <a
+                  href={company.companyWebsite}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fa-sharp-duotone fa-solid fa-globe-pointer hover:text-green-400"></i>
+                </a>
+
+                <a
+                  href={company.linkedinPage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fa-brands fa-linkedin hover:text-green-400"></i>
+                </a>
+              </div>
             </div>
           </div>
+
           <hr />
+
           <div className="px-6 py-10">
             <div
               dangerouslySetInnerHTML={{

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCompanyAndJob, getAllCompanies, getCompanyById, getCompanyByIdForUser, updateCompanyByIdForUser } from '../controllers/companyController.js';
+import { createCompany, deleteCompanyById, getAllCompanies, getAllCompaniesAdmin, getCompanyById, getCompanyByIdForUser, updateCompanyById, updateCompanyByIdForUser } from '../controllers/companyController.js';
 import { addRole, verifyToken } from '../middlewares/authMiddleware.js';
 import CompanyInfo from '../models/CompanyInfo_model.js';
 import Job from '../models/job_model.js';
@@ -44,7 +44,23 @@ router.get('/checkUserRole', verifyToken, async (req, res) => {
 });
 
 
-router.post('/createCompanyAndJob', verifyToken, createCompanyAndJob);
+router.post('/createCompany', verifyToken, addRole(['jobSeeker', 'admin']), createCompany);
+//admin
+router
+    .route("/getAllCompaniesAdmin")
+    .get(verifyToken, addRole(['admin']), getAllCompaniesAdmin);
+
+
+router
+    .route("/updateCompany/:id")
+    .put(verifyToken, addRole(['admin']), updateCompanyById);
+router
+    .route("/deleteCompany/:id")
+    .delete(verifyToken, addRole(['jobSeeker', 'admin']), deleteCompanyById);
+
+
+
+
 // router.post('/createJob', verifyToken, addRole(['jobSeeker', 'admin']), async (req, res) => {
 //     const { job } = req.body;
 //     const userId = req.user._id; // Extract userId from token

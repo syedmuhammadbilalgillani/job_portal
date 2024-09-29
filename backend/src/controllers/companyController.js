@@ -11,8 +11,9 @@ import Job from '../models/job_model.js';
 
 
 
-export const createCompanyAndJob = async (req, res) => {
-    const { company, job } = req.body;
+// export const createCompanyAndJob = async (req, res) => {
+export const createCompany = async (req, res) => {
+    const { company } = req.body;
     const userId = req.user._id; // Extract userId from token
 
     try {
@@ -38,12 +39,12 @@ export const createCompanyAndJob = async (req, res) => {
         const newCompany = new CompanyInfo({ ...company, createdBy: userId, approvalStatus: 'pending' });
         const savedCompany = await newCompany.save();
 
-        // Create a new job with approval status set to 'pending'
-        job.companyLogo = savedCompany._id;
-        const newJob = new Job({ ...job, approvalStatus: 'pending' });
-        const savedJob = await newJob.save();
+        // // Create a new job with approval status set to 'pending'
+        // job.companyLogo = savedCompany._id;
+        // const newJob = new Job({ ...job, approvalStatus: 'pending' });
+        // const savedJob = await newJob.save();
 
-        res.status(201).json({ company: savedCompany, job: savedJob });
+        res.status(201).json({ company: savedCompany, message: "Company Created Successfully" });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -53,6 +54,14 @@ export const createCompanyAndJob = async (req, res) => {
 export const getAllCompanies = async (req, res) => {
     try {
         const companies = await CompanyInfo.find({ approvalStatus: 'approved' });
+        res.json(companies);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+export const getAllCompaniesAdmin = async (req, res) => {
+    try {
+        const companies = await CompanyInfo.find();
         res.json(companies);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -134,5 +143,36 @@ export const updateCompanyByIdForUser = async (req, res) => {
     } catch (error) {
         console.error('Error updating company:', error);
         res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+export const updateCompanyById = async (req, res) => {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    try {
+        const company = await CompanyInfo.findByIdAndUpdate(id, updatedData, { new: true });
+        if (!company) {
+            return res.status(404).json({ message: 'CompanyInfo not found' });
+        }
+        res.status(200).json(company);
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating CompanyInfo', error });
+    }
+};
+export const deleteCompanyById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await CompanyInfo.deleteOne({ _id: id });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Company not found' });
+        }
+
+        res.status(200).json({ message: 'Company deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting CompanyInfo', error });
     }
 };

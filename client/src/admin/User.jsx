@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 function User() {
   const { allUserData, deleteUserById, userContactInfo } = useAuth();
-  console.log(allUserData);
+  // console.log(allUserData);
   return (
     <>
       <div className="overflow-x-auto sm-to-xs:px-5 min-h-dvh">

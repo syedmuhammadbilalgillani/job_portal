@@ -35,7 +35,7 @@ const UploadImageInGallery = () => {
 
   return (
     <>
-      <main className="p-6 w-fit bg-gray-100 rounded-xl shadow-custom flex gap-10">
+      <main className="p-6 h-fit bg-gray-100 rounded-xl shadow-custom flex gap-10 w-full xs:overflow-hidden">
         <form onSubmit={handleSubmit} className="space-y-10">
           <div className="flex flex-col justify-between">
             <label htmlFor="file-upload" className="relative cursor-pointer">

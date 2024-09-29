@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useJobApplicationContext } from "../../context/JobApplicationContext";
 import { Link } from "react-router-dom";
 import { useCompanyJob } from "../../context/CompanyJobContext";
@@ -9,10 +9,13 @@ import Modal from "../Modal/Modal";
 function AppliedJobs() {
   const { applications, getUserAppliedApplications } =
     useJobApplicationContext();
-  const { companies } = useCompanyJob();
+  const { fetchCompanies, companies } = useCompanyJob();
   const token = Cookies.get("AUTH_TOKEN");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
 
   const openModal = (id) => {
     setDeleteId(id);
@@ -63,7 +66,7 @@ function AppliedJobs() {
                 <Link to={`/job/${application.job._id}`} className="flex gap-7">
                   <div className="p-4 inline-block border shadow-custom rounded-2xl">
                     <img
-                      src={getCompanyLogo(application.job.companyLogo)}
+                      src={getCompanyLogo(application.job.companyId)}
                       className="size-12"
                       alt=""
                     />

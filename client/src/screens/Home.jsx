@@ -10,7 +10,6 @@ import JobBanner from "../components/jobbanner/JobBanner";
 import BlogCard from "../components/blogcard/BlogCard";
 import Questions from "../components/questions/Questions";
 import ContactUsBannerFooter from "../components/contactusbannerfooter/ContactUsBannerFooter";
-
 import footerbadge from "../assets/footer-badge.svg";
 
 function Home() {
@@ -51,7 +50,7 @@ function Home() {
         </ContactUsBanner>
         <Jobs />
         <JobBanner />
-        <BlogCard />
+        {/* <BlogCard /> */}
         <Questions />
         <ContactUsBannerFooter>
           <div className="p-20 sm-to-xs:p-14 max-w-[50%] md-to-xs:max-w-full space-y-5">

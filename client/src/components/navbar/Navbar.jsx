@@ -49,7 +49,7 @@ function Navbar() {
   }, []);
 
   const navClasses = classNames(
-    "py-7 px-[8%] w-full flex justify-between gap-2 items-center",
+    "py-1 px-[8%] w-full flex justify-between gap-2 items-center",
     {
       "absolute top-0 bg-transparent z-[999]": location.pathname === "/",
       "bg-white relative z-[999]": location.pathname !== "/",
@@ -83,12 +83,12 @@ function Navbar() {
               loading="lazy"
               src={navLogo}
               alt="Navigation Logo"
-              className="h-7 sm-to-xs:h-4"
+              className="h-20 sm-to-xs:h-4"
             />
           </NavLink>
 
           <div className="flex gap-5 sm:hidden xs:hidden md:hidden">
-            <div ref={menuRef}>
+            {/* <div ref={menuRef}>
               {menuState.isMenuOpen ? (
                 <div className="font-semibold hover:text-green-400 cursor-pointer">
                   Pages
@@ -102,7 +102,7 @@ function Navbar() {
                 </button>
               )}
               <MegaMenuNavbar isOpen={menuState.isMenuOpen} />
-            </div>
+            </div> */}
             {NavLinks.row1.map((item, index) => (
               <Link
                 key={index}
@@ -129,7 +129,7 @@ function Navbar() {
                   ? "/postJobOffer"
                   : "/jobs"
               }`}
-              className={`font-semibold text-white btn-black px-4 py-3 rounded-md sm-to-xs:text-xs sm-to-xs:max ${
+              className={`font-semibold text-white btn-black px-3 py-3 rounded-md sm-to-xs:text-xs text-sm ${
                 (location.pathname === "/jobs" && role === null) ||
                 role === "employer"
                   ? "hidden"
@@ -224,12 +224,12 @@ function Navbar() {
         </div>
         <div className={toggleMenuClasses} ref={toggleMenuRef}>
           <div ref={menuRef}>
-            <button
+            {/* <button
               onClick={handleMenuToggle}
               className="font-semibold hover:text-green-400"
             >
               Pages
-            </button>
+            </button> */}
             <MegaMenuNavbar isOpen={menuState.isMenuOpen} />
           </div>
           {NavLinks.row1.map((item, index) => (

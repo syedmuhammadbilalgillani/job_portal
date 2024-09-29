@@ -51,6 +51,7 @@ body {
 
 .custom-tooltip-container:hover::after {
     opacity: 1;
+
 }
 
 .btn-green {

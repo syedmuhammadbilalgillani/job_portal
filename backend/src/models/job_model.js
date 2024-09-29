@@ -19,7 +19,7 @@ const jobSchema = new Schema({
         type: String,
         required: true,
     },
-    companyLogo: {
+    companyId: {
         type: Schema.Types.ObjectId,
         ref: 'Company',
         required: true,

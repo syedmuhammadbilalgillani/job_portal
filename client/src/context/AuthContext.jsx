@@ -28,8 +28,13 @@ export const AuthProvider = ({ children }) => {
     fetchCompanyByIdForUser,
     fetchgetAuthenticatedUserJobsPost,
     fetchJobsAdmin,
+    fetchAllCompaniesAdmin,
   } = useCompanyJob();
-  const { getUserAppliedApplications } = useJobApplicationContext();
+  const {
+    getUserAppliedApplications,
+    getJobApplicationsForMyPostedJobs,
+    checkCVExists,
+  } = useJobApplicationContext();
   const checkTokenValidity = () => {
     const token = Cookies.get("AUTH_TOKEN");
     return token !== undefined;
@@ -354,6 +359,7 @@ export const AuthProvider = ({ children }) => {
       userProfile(token);
       fetchUserContactInfo(token);
       getUserAppliedApplications(token);
+      checkCVExists(token);
     }
     setIsLoading(false);
   }, []);
@@ -363,6 +369,13 @@ export const AuthProvider = ({ children }) => {
       const token = Cookies.get("AUTH_TOKEN");
       fetchAllUsersData(token);
       fetchJobsAdmin(token);
+      fetchAllCompaniesAdmin(token);
+    }
+  }, [role, isAuthenticated]);
+  useEffect(() => {
+    if (role === "jobSeeker" && isAuthenticated) {
+      const token = Cookies.get("AUTH_TOKEN");
+      // getJobApplicationsForMyPostedJobs(token);
     }
   }, [role, isAuthenticated]);
   useEffect(() => {
@@ -371,6 +384,7 @@ export const AuthProvider = ({ children }) => {
 
       fetchCompanyByIdForUser(token);
       fetchgetAuthenticatedUserJobsPost(token);
+      // getJobApplicationsForMyPostedJobs(token);
     }
   }, [role, isAuthenticated]);
 
