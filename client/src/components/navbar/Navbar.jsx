@@ -83,7 +83,7 @@ function Navbar() {
               loading="lazy"
               src={navLogo}
               alt="Navigation Logo"
-              className="h-20 sm-to-xs:h-4"
+              className="h-20 sm-to-xs:h-12"
             />
           </NavLink>
 
