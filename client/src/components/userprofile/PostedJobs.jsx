@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useCompanyJob } from "../../context/CompanyJobContext";
 import axios from "axios";
 import JoditEditor from "jodit-react";
 import Cookies from "js-cookie";
-import Modal from "../Modal/Modal";
+import React, { useEffect, useState } from "react";
+import { useCompanyJob } from "../../context/CompanyJobContext";
 import Input from "../Input/Input";
+import Modal from "../Modal/Modal";
 
 function PostedJobs() {
   const {
@@ -73,18 +73,16 @@ function PostedJobs() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const apiUrl = import.meta.env.VITE_API_KEY;
 
   const handleUpdate = async () => {
     try {
-      await axios.put(
-        `http://localhost:3000/api/v1/job/updateJob/${editingJob._id}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      console.log(apiUrl);
+      await axios.put(`${apiUrl}/job/updateJob/${editingJob._id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setEditingJob(null);
       handleUpdateJobModalClose();
       fetchgetAuthenticatedUserJobsPost(token);
