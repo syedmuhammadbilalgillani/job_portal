@@ -1,14 +1,13 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  startTransition,
-} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import React, {
+  createContext,
+  startTransition,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { useToast } from "../context/ToastContext/ToastContext";
-import Loader from "../components/Loader/Loader";
 
 const GalleryContext = createContext();
 
