@@ -1,12 +1,10 @@
-import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import JobPageBanner from "../components/jobpagebanner/JobPageBanner";
-import CompanyAndJob from "../components/companyAndJobForm/CompanyAndJob";
-
-const Loader = lazy(() => import("../components/Loader/Loader"));
+import React, { lazy, useEffect } from "react";
 import { Link } from "react-router-dom";
+import JobPageBanner from "../components/jobpagebanner/JobPageBanner";
 import { scrollToSection } from "../constants/Scroll";
 import { useCompanyJob } from "../context/CompanyJobContext";
+
+const Loader = lazy(() => import("../components/Loader/Loader"));
 // import big from "../assets/background large.png";
 
 const Companies = () => {
@@ -18,7 +16,34 @@ const Companies = () => {
   const handleLinkClick = (id) => {
     setTimeout(() => scrollToSection(id, 500), 100); // 2000ms = 2 seconds
   };
-  if (companies.length === 0) return <p>Company Detail not posted</p>;
+  // ... existing code ...
+  if (companies.length === 0)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-24 w-24 mb-4 text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+          />
+        </svg>
+        <h2 className="text-2xl font-semibold mb-2">
+          No Company Details Available
+        </h2>
+        <p className="text-gray-600 max-w-md">
+          There are currently no partner companies to display. Please check back
+          later for updates.
+        </p>
+      </div>
+    );
+  // ... existing code ...
   return (
     <>
       <div className=" flex flex-col justify-center items-center text-center py-[10%]">
