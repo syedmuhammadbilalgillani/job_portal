@@ -24,45 +24,34 @@ import cvRoutes from './routes/cvRoutes.js';
 
 const app = express();
 
-// // Define the list of allowed origins
-// const allowedOrigins = [
-//     process.env.ALLOWED_ORIGIN_1,
-//     process.env.ALLOWED_ORIGIN_2,
-//     process.env.ALLOWED_ORIGIN_3,
-//     process.env.ALLOWED_ORIGIN_4
-// ];
+// Define the list of allowed origins
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://battertalent.vercel.app'
+];
 
-// const corsOptions = {
-//     origin: (origin, callback) => {
-//         if (!origin || allowedOrigins.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             console.error(`CORS error: Origin ${origin} not allowed`);
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     },
-//     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'], // Allowed methods
-//     credentials: true,
-//     optionsSuccessStatus: 204,
-//     allowedHeaders: '*', // Allow all headers
-//     preflightContinue: false,
-// };
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, etc)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.error(`CORS error: Origin ${origin} not allowed`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    credentials: true,
+    optionsSuccessStatus: 204,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+};
 
-// // Apply CORS middleware
-// app.use(cors(corsOptions));
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
-// // Handle preflight requests
-// app.options('*', cors(corsOptions));
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
-
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}))
-// app.use(cors({
-//     origin: 'http://localhost:5173', // Aap ke frontend ka origin
-//     credentials: true, // Agar aap credentials use kar rahe hain (cookies, authorization headers)
-// }));
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(bodyParser.json());
