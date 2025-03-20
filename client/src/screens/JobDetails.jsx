@@ -16,8 +16,8 @@ import TextAreaInput from "../components/Input/TextAreaInput";
 function JobDetails() {
   const { id } = useParams();
   const showToast = useToast();
-  // const { fetchCompanies, companies } = useCompanyJob();
-  const { fetchCompanies } = useCompanyJob();
+  const { fetchCompanies, companies } = useCompanyJob();
+  // const { fetchCompanies } = useCompanyJob();
   const [job, setJob] = useState(null);
   const { role, isAuthenticated } = useAuth();
   const { CVExists, applyForJob } = useJobApplicationContext();
@@ -41,25 +41,25 @@ function JobDetails() {
   useEffect(() => {
     fetchCompanies();
   }, []);
-  const companies = [
-    {
-      _id: "67c9d59d82a113e01946a2fa",
-      createdBy: "67c9d54a82a113e01946a279",
-      companyName: "Apple",
-      companyIndustry: "Velez Ward Traders",
-      companyWebsite: "https://www.loquna.com",
-      linkedinPage: "https://www.volojenyliboc.org.au",
-      companyLogo:
-        "https://cdn.prod.website-files.com/66277a0e9303f0424cbe9fa6/664703387d3dd83b53b48a85_Apple%20Logo.svg",
-      numberOfEmployees: 202,
-      companyDescription: "Enim fugiat ad optio",
-      companyPostDescription: "",
-      approvalStatus: "approved",
-      createdAt: "2025-03-06T17:04:29.213Z",
-      updatedAt: "2025-03-06T17:04:41.417Z",
-      __v: 0,
-    },
-  ];
+  // const companies = [
+  //   {
+  //     _id: "67c9d59d82a113e01946a2fa",
+  //     createdBy: "67c9d54a82a113e01946a279",
+  //     companyName: "Apple",
+  //     companyIndustry: "Velez Ward Traders",
+  //     companyWebsite: "https://www.loquna.com",
+  //     linkedinPage: "https://www.volojenyliboc.org.au",
+  //     companyLogo:
+  //       "https://cdn.prod.website-files.com/66277a0e9303f0424cbe9fa6/664703387d3dd83b53b48a85_Apple%20Logo.svg",
+  //     numberOfEmployees: 202,
+  //     companyDescription: "Enim fugiat ad optio",
+  //     companyPostDescription: "",
+  //     approvalStatus: "approved",
+  //     createdAt: "2025-03-06T17:04:29.213Z",
+  //     updatedAt: "2025-03-06T17:04:41.417Z",
+  //     __v: 0,
+  //   },
+  // ];
   const getCompanyLogo = (companyId) => {
     const company = companies.find((company) => company._id === companyId);
     return company ? company.companyLogo : "Unknown";
