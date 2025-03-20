@@ -8,7 +8,7 @@ const ContentComponent = () => {
     const fetchContent = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/contact&Company/content"
+          "https://bettertalentserver.vercel.app/api/v1/contact&Company/content"
         ); // Replace with your actual API endpoint
         setContent(response.data); // Assuming response.data is an array of content items
       } catch (err) {

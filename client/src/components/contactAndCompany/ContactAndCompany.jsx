@@ -61,7 +61,7 @@ function ContactAndCompany({ placeholder }) {
       };
 
       const response = await axios.post(
-        "http://localhost:3000/api/v1/createContactAndCompany/create",
+        "https://bettertalentserver.vercel.app/api/v1/createContactAndCompany/create",
         formDataWithDescription
       );
       const { data } = response;

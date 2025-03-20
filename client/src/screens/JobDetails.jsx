@@ -74,7 +74,7 @@ function JobDetails() {
     const fetchJobById = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/job/readJob/${id}`
+          `https://bettertalentserver.vercel.app/api/v1/job/readJob/${id}`
         );
         setJob(response.data);
         setFormData({
@@ -103,7 +103,7 @@ function JobDetails() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/v1/job/updateJob/${id}`,
+        `https://bettertalentserver.vercel.app/api/v1/job/updateJob/${id}`,
         formData,
         {
           headers: {

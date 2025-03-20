@@ -226,7 +226,7 @@ export default Draft;
 
 //   useEffect(() => {
 //     // Load elements from database on component mount
-//     axios.get("http://localhost:3000/api/v1/cv/").then((response) => {
+//     axios.get("https://bettertalentserver.vercel.app/api/v1/cv/").then((response) => {
 //       setElements(response.data);
 //     });
 //   }, []);
@@ -245,7 +245,7 @@ export default Draft;
 
 //   const saveElements = () => {
 //     axios
-//       .post("http://localhost:3000/api/v1/cv/", elements)
+//       .post("https://bettertalentserver.vercel.app/api/v1/cv/", elements)
 //       .then((response) => {
 //         console.log("Elements saved successfully");
 //       });
@@ -317,7 +317,7 @@ export default Draft;
 //       };
 
 //       const response = await axios.post(
-//         "http://localhost:3000/api/v1/createContactAndCompany/create",
+//         "https://bettertalentserver.vercel.app/api/v1/createContactAndCompany/create",
 //         formDataWithDescription
 //       );
 //       console.log(response.data); // Assuming you want to log the response
@@ -454,7 +454,7 @@ export default Draft;
 //     event.preventDefault();
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:3000/api/v1/contact&Company/saveContent",
+//         "https://bettertalentserver.vercel.app/api/v1/contact&Company/saveContent",
 //         { content }
 //       );
 //       if (response.status === 200) {
@@ -515,7 +515,7 @@ export default Draft;
 //   const fetchContent = async () => {
 //     try {
 //       const response = await axios.get(
-//         "http://localhost:3000/api/v1/contact&Company/content"
+//         "https://bettertalentserver.vercel.app/api/v1/contact&Company/content"
 //       );
 //       setReadContent(response.data);
 //     } catch (err) {
@@ -530,7 +530,7 @@ export default Draft;
 //     event.preventDefault();
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:3000/api/v1/contact&Company/saveContent",
+//         "https://bettertalentserver.vercel.app/api/v1/contact&Company/saveContent",
 //         { content }
 //       );
 //       if (response.status === 200) {

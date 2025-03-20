@@ -73,7 +73,7 @@ function AllJobs() {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/api/v1/job/updateJob/${editingJob._id}`,
+        `https://bettertalentserver.vercel.app/api/v1/job/updateJob/${editingJob._id}`,
         formData,
         {
           headers: {
@@ -91,7 +91,7 @@ function AllJobs() {
   const handledelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/v1/job/deleteJobById/${id}`,
+        `https://bettertalentserver.vercel.app/api/v1/job/deleteJobById/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

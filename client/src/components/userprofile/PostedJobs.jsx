@@ -93,7 +93,7 @@ function PostedJobs() {
   const handledelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/v1/job/deleteJobById/${id}`,
+        `https://bettertalentserver.vercel.app/api/v1/job/deleteJobById/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

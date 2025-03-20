@@ -183,7 +183,7 @@ const ElementBuilder = () => {
   const fetchPage = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/cv/get-pages`
+        `https://bettertalentserver.vercel.app/api/v1/cv/get-pages`
       );
       setPage(response.data);
     } catch (error) {
@@ -193,7 +193,7 @@ const ElementBuilder = () => {
   const savePageToDB = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/cv/save-page",
+        "https://bettertalentserver.vercel.app/api/v1/cv/save-page",
         {
           elements,
           htmlCode,
@@ -212,7 +212,7 @@ const ElementBuilder = () => {
   const DeteleById = async (_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/cv/delete/${_id}`
+        `https://bettertalentserver.vercel.app/api/v1/cv/delete/${_id}`
       );
       // console.log(response.data.message);
       if (response.status === 200) {
