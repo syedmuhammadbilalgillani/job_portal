@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:3000/api/v1/user';
+const API_URL = 'https://bettertalentserver.vercel.app/api/v1/user';
 
 export const login = async (credentials) => {
     try {

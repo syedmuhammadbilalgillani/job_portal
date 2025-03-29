@@ -10,9 +10,9 @@ function User() {
         <table className="min-w-full bg-white  shadow-custom  my-6 mx-2 ">
           <thead className="">
             <tr className="bg-gray-400 text-white text-left">
-              <th className="py-3 px-3 uppercase font-semibold text-sm">
+              {/* <th className="py-3 px-3 uppercase font-semibold text-sm">
                 userId
-              </th>
+              </th> */}
               <th className="py-3 px-3 uppercase font-semibold text-sm">
                 Name
               </th>
@@ -54,7 +54,7 @@ function User() {
           <tbody>
             {allUserData?.map((data, index) => (
               <tr className="hover:bg-gray-200" key={index}>
-                <td className="py-3 px-3">{data?._id}</td>
+                {/* <td className="py-3 px-3">{data?._id}</td> */}
                 <td className="py-3 px-3">{data?.name}</td>
                 <td className="py-3 px-3">{data?.email}</td>
                 <td className="py-3 px-3">{data?.role}</td>

@@ -8,12 +8,11 @@
     "node": "22.x"
   },
   "scripts": {
-    "dev": "nodemon --env-file .env ./index.js",
-    "build": "node --env-file .env ./index.js",
-    "start": "node ./index.js",
+    "dev": "node init && nodemon --env-file .env ./index.js",
+    "build": "node init && node --env-file .env ./index.js",
+    "start": "node init && node ./index.js",
     "seed": "node ./src/seeds/seed.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
