@@ -74,7 +74,7 @@ function UserProfile() {
   };
 
   const userInfo = [
-    { label: "ID", value: userData?._id },
+    // { label: "ID", value: userData?._id },
     { label: "Name", value: formData.name, key: "name" },
     { label: "Email", value: formData.email, key: "email" },
     {
